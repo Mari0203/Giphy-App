@@ -36,7 +36,8 @@
         <div id="gifs-section">
         </div>
 
-        <!-- JavaScript codes -->
+    <!-- JavaScript codes -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">
 
         /* Event listener for all button elements and save info into each data-emotion 
@@ -46,7 +47,18 @@
         });
         
         // URL to searvch Giphy for the name of the emotion:
-        
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        emotion + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
+
+        //Performing the AJAX GET request, then store an array of results in the variable:
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+
+            .then(function(response) {
+                var results = response.data;
+            });
 
         </script>
 
