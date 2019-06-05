@@ -9,67 +9,67 @@
 
     <!--- Bootstrap CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+    .classForButton {
+        padding: 10px;
+        /* margin: 0px, 20px; */
+    }
+    </style>
+
 </head>
+
+<!--  
+    Instruction: 
+    1. The app takes the topic/keyword in your array and create buttons in the HTML.  Use a loop that
+    appends a button for each string in the array.
+
+    2. When a user clicks on a button, the page shoudl grab 10 STATIC, non-animated gif images from
+    the GIPHY API, and place them on the page.
+
+    3. Clicking on a still GIPHY image should animate that gif.  Clicking it again should stop playing.
+
+    4. Under every gif, display its rating ("Rating: PG, G, etc...")
+            - This data is provided by the GIPHY API.
+            - Only once you get images displaying with button presses, should you move on to the next step!
+
+    5. Add a form to your page that takes a value form a user input box, and add it to your topics array.
+
+    6. Then, make a function call that takes each topic in the array and remakes the buttons on the page.
+-->
 
 <body>
     <div class="container">
         <h1>Giphy App</h1>
-        <h3>Click on word and see gifs populate!</h3>
+        <h4>Submit your reation in the box to find gifs. Play/Pause gifs by clicking.</h4>
         <hr>
-        
+
         <!-- Buttons go here -->
-        <button data-emotion="Yes">Yes!</button>
-        <button data-emotion="Uhh">Uhh...</button>
-        <button data-emotion="Meh">Meh...</button>
-        <button data-emotion="Nope">Nope!</button>
-        <button data-emotion="That feel when">TFW</button>
-        <button data-emotion="Oh snap!">Oh snap!</button>
-        <button data-emotion="Uh-huh">Uh-huh</button>
-        <button data-emotion="Puh-lease">Girl, please</button>
-        <button data-emotion="Awww">Awww</button>
-        <button data-emotion="My hero">My hero</button>
-        <button data-emotion="Shhh">Shhh!</button>
-        <button data-emotion="Eye-roll">(Eye-roll)</button>
-        <button data-emotion="Heyyy">Heyyy</button>
+        <div id="buttons"></div>
+
+        <!-- User entry submission -->
+        <form id="submission-box">
+            <div class="form-group">
+                <label for="entry">Add your emotion</label>
+                <input type="text" class="form-control" id="entry" placeholder="Aww...">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- <button data-emotion="Yes">Yes!</button> -->
+
 
         <!-- Output gif images show up here -->
         <div id="gifs-section">
         </div>
-
-    <!-- JavaScript codes -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript">
-
-        /* Event listener for all button elements and save info into each data-emotion 
-        when that specific button is clicked. */
-        $("button").on("click", function() {
-            var emotion = $(this).attr("data-emotion");
-        });
-        
-        // URL to searvch Giphy for the name of the emotion:
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        emotion + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
-
-        //Performing the AJAX GET request, then store an array of results in the variable:
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-
-            .then(function(response) {
-                var results = response.data;
-            });
-
-        </script>
-
     </div>
-
-
 
     <!-- jQuery, javascript file for the Bootstrap's javascript file to function -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 
+    <!-- JavaScript codes -->
+    <script src="app.js"></script>
 </body>
 
 </html>
