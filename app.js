@@ -51,12 +51,9 @@ $("#submission-box").on("submit", function(e) {
 console.log(emotion);
 
 
-// URL to searvch Giphy for the name of the emotion:
-// My API key: lBtXwR7tqfrf553s7E99F3o2oAa4EC61
-var queryURL =
-  "https://api.giphy.com/v1/gifs/search?q=" +
-  emotion +
-  "&api_key=lBtXwR7tqfrf553s7E99F3o2oAa4EC61&limit=10";
+// Store my API Key and URL to be used for get gifs from Giphy with result output limit set to 10.
+var api_key = lBtXwR7tqfrf553s7E99F3o2oAa4EC61;
+var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + emotion + "&api_key=" + api_key + "&limit=10";
 
 //Performing the AJAX GET request, then store an array of results in the variable:
 $.ajax({
