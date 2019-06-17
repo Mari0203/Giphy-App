@@ -8,14 +8,14 @@ var emotion = [
   "oh snap",
   "uh-ohh",
   "aww",
-  "hey",
-  "shh"
+  "hey"
 ];
 
 // Creates buttons for each value in the array emotion:
-// Needs to style buttons to have space between each: 
+// Needs to style buttons to have space between each:
 
 var buttonGenerator = function() {
+  $("#buttonList").html(""); // Re-set to empty buttonList div
   for (var i = 0; i < emotion.length; i++) {
     var button = $("<button>");
     button.addClass("classForButton");
@@ -23,7 +23,7 @@ var buttonGenerator = function() {
     button.css("margin-left", "3px");
     button.attr("data-type", emotion[i]);
     button.text(emotion[i]);
-    $("#buttons").append(button);
+    $("#buttonList").append(button);
   }
 };
 
@@ -31,15 +31,32 @@ var buttonGenerator = function() {
 buttonGenerator();
 
 /* Event listener for all button elements and save info into each data-emotion 
-        when that specific button is clicked. */
-$("button").on("click", function() {
+  when that specific button is clicked. */
+$(".classForButton").on("click", function(e) {
   var emotion = $(this).attr("data-emotion");
+  alert($(this).html()); // check to make sure this function works.
+  });
+
+// Function to dynamically create a new button with the keyword submitted by the user;
+
+/* Do this by adding the new word into the emotion array, and then calling the buttonGenerator 
+   function to dynamically create a new button. */
+$("#submission-box").on("submit", function(e) {
+  e.preventDefault();  // Prevents the form's submit's default action of refreshing the page.
+  emotion.push($("#entry").val());
+  buttonGenerator();
 });
 
-// URL to searvch Giphy for the name of the emotion:
-var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + emotion + "&api_key=lBtXwR7tqfrf553s7E99F3o2oAa4EC61&limit=10";
+// Check to see if the new word was added to the emotion array:
+console.log(emotion);
 
+
+// URL to searvch Giphy for the name of the emotion:
 // My API key: lBtXwR7tqfrf553s7E99F3o2oAa4EC61
+var queryURL =
+  "https://api.giphy.com/v1/gifs/search?q=" +
+  emotion +
+  "&api_key=lBtXwR7tqfrf553s7E99F3o2oAa4EC61&limit=10";
 
 //Performing the AJAX GET request, then store an array of results in the variable:
 $.ajax({
